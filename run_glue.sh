@@ -1,0 +1,28 @@
+export CUDA_VISIBLE_DEVICES=3
+python 'transformers/examples/pytorch/text-classification/run_glue.py'   \
+--method lora \
+--model_name_or_path 'roberta-base'   \
+--output_dir './trained_models/roberta-base-glue-test/'  \
+--task_name wic \
+--do_train \
+--do_eval \
+--max_seq_length 128 \
+--per_device_train_batch_size 32 \
+--kl_loss_weight 1e-5 \
+--use_entropy True \
+--num_train_epochs 1 \
+--num_epochs_coop 1 \
+--lora_r 8 \
+--learning_rate 1e-4 \
+--learning_rate_coop 1e-4 \
+--eval_step 1000 \
+--save_step 1000 \
+--lora_alpha 64 \
+--posthoc_app 0 \
+--target_modules 'key,value,query,dense' \
+--use_monteclora True \
+--monteclora_at '' \
+--monteclora_targets 'key,value,query,dense' \
+--overwrite_output_dir 'true' \
+--mc_training True \
+--apply_lora \

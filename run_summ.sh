@@ -1,0 +1,27 @@
+
+python 'transformers/examples/pytorch/summarization/run_summarization.py'   \
+--model_name_or_path 'facebook/bart-base'   \
+--output_dir './trained_models/bart-base-xsum-test/'  \
+--dataset_name 'xsum' \
+--do_train \
+--do_eval \
+--per_device_train_batch_size 32 \
+--kl_loss_weight 1e-5 \
+--use_entropy True \
+--num_train_epochs 1 \
+--num_epochs_coop 1 \
+--lora_r 32 \
+--learning_rate 1e-4 \
+--learning_rate_coop 1e-4 \
+--eval_step 1000 \
+--save_step 1000 \
+--lora_alpha 64 \
+--posthoc_app 0 \
+--target_modules 'k_proj' \
+--use_monteclora True \
+--monteclora_at 'lora_A' \
+--monteclora_targets 'k_proj' \
+--overwrite_output_dir True \
+--apply_lora \
+--trust_remote_code 'true' \
+--predict_with_generate True \

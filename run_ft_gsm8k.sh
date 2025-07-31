@@ -1,0 +1,29 @@
+CUDA_VISIBLE_DEVICES=1 python finetune_gsm8k.py   \
+--base_model 'meta-llama/Llama-3.2-3B-Instruct'   \
+--data_path 'gsm8k'   \
+--output_dir 'debug-loraplus'  \
+--method loraplus \
+--subsample_split 0.001 \
+--batch_size 8 \
+--kl_loss_weight 1e-5 \
+--use_entropy True \
+--micro_batch_size 4 \
+--num_epochs 3 \
+--num_epochs_coop 0 \
+--lora_r 32 \
+--learning_rate 1e-4 \
+--learning_rate_coop 1e-4 \
+--cutoff_len 256 \
+--val_set_size 120 \
+--apply_peft \
+--eval_step 1225 \
+--save_step 1225 \
+--lora_alpha 64 \
+--posthoc_app 0 \
+--target_modules '["q_proj", "k_proj", "v_proj"]' \
+--use_monteclora False \
+--sample_scaler 1e-6 \
+--monteclora_at '' \
+--monteclora_targets '["q_proj", "k_proj", "v_proj"]' \
+--wandb_project 'peft-monteclora' \
+--wandb_run_name 'llama-3.2-3B-qkv-lora-math10k' \

@@ -1,0 +1,30 @@
+CUDA_VISIBLE_DEVICES=0 python finetune.py   \
+--base_model '/home/models/Meta-Llama-3.2-3B'   \
+--data_path './ft-training_set/math_10k.json'   \
+--output_dir './expt-runs/monteclora/llama-3.2-3B-monteclora-math10k'  \
+--method monteclora \
+--monteclora_n 1 \
+--subsample_split 1.0 \
+--batch_size 8 \
+--kl_loss_weight 1e-5 \
+--use_entropy True \
+--micro_batch_size 4 \
+--num_epochs 3 \
+--num_epochs_coop 3 \
+--lora_r 32 \
+--learning_rate 1e-4 \
+--learning_rate_coop 1e-4 \
+--cutoff_len 256 \
+--val_set_size 120 \
+--apply_lora \
+--eval_step 1225 \
+--save_step 1225 \
+--lora_alpha 64 \
+--posthoc_app 0 \
+--target_modules '["q_proj", "k_proj", "v_proj"]' \
+--use_monteclora True \
+--sample_scaler 1e-6 \
+--monteclora_at 'lora_A' \
+--monteclora_targets '["q_proj", "k_proj", "v_proj"]' \
+--wandb_project 'peft-monteclora' \
+--wandb_run_name 'llama-3.2-3B-qkv-monteclora-math10k' \
